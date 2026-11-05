@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="EcoMarket - Panel Administrativo para gestión de catálogo, inventario en tiempo real, KPIs y operaciones CRUD.">
+  <title>EcoMarket | Panel Administrativo de Inventario</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Chart.js permitido oficialmente según la guía del taller para el gráfico estadístico bonus -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body class="dashboard-body">
+
+  <!-- =========================================================================
+       SIDEBAR / MENÚ LATERAL (RESPONSIVE CON MENÚ HAMBURGUESA)
+       ========================================================================= -->
+  <aside class="dashboard-sidebar" id="sidebar-dashboard" aria-label="Menú principal de administración">
+    <div class="sidebar-header">
+      <a href="index.html" class="logo logo-sidebar" aria-label="Ir a la landing page">
+        <span class="logo-leaf">🌱</span> Eco<span>Market</span>
+      </a>
+      <button type="button" class="btn-sidebar-close" id="btn-cerrar-sidebar" aria-label="Cerrar menú lateral">
+        &times;
+      </button>
+    </div>
+
+    <div class="sidebar-user">
+      <div class="user-avatar">AD</div>
+      <div class="user-meta">
+        <span class="user-name">Administrador</span>
+        <span class="user-status"><span class="status-dot"></span> Modo en línea</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <ul class="sidebar-menu">
+        <li class="sidebar-item">
+          <a href="#seccion-kpis" class="sidebar-link active" data-nav="kpis">
+            <span class="sidebar-icon">📊</span>
+            <span>Resumen & KPIs</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="#seccion-inventario" class="sidebar-link" data-nav="inventario">
+            <span class="sidebar-icon">📦</span>
+            <span>Catálogo e Inventario</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="#seccion-grafico" class="sidebar-link" data-nav="grafico">
+            <span class="sidebar-icon">📈</span>
+            <span>Distribución de Categorías</span>
+          </a>
+        </li>
+        <li class="sidebar-item">
+          <a href="#seccion-productores" class="sidebar-link" data-nav="productores">
+            <span class="sidebar-icon">👩‍🌾</span>
+            <span>Productores Aliados</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-footer">
+      <a href="index.html" class="btn btn-outline btn-block btn-sm">
+        &larr; Volver a la Landing
+      </a>
+      <p class="sidebar-version">EcoMarket MVP v2.0 • 2026</p>
+    </div>
+  </aside>
+
+  <!-- Overlay para cerrar sidebar en móviles al hacer clic fuera -->
+  <div class="sidebar-backdrop" id="sidebar-backdrop" aria-hidden="true"></div>
+
+  <!-- =========================================================================
+       ÁREA PRINCIPAL DE CONTENIDO (MAIN WRAPPER)
+       ========================================================================= -->
+  <div class="dashboard-main-wrapper">
+
+    <!-- Topbar Superior -->
+    <header class="dashboard-topbar">
+      <div class="topbar-left">
+        <button type="button" 
+                class="btn-hamburger" 
+                id="btn-menu-hamburguesa" 
+                aria-label="Abrir menú de navegación lateral" 
+                aria-expanded="false" 
+                aria-controls="sidebar-dashboard">
+          <span class="hamburger-icon" id="icono-hamburguesa">☰</span>
+        </button>
+        <div>
+          <h1 class="dashboard-page-title">Gestión de Catálogo e Inventario</h1>
+          <p class="dashboard-greeting">Bienvenido al centro de administración de EcoMarket Colombia.</p>
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <button type="button" class="btn btn-primary" id="btn-abrir-crear">
+          <span>➕</span> Agregar producto
+        </button>
+      </div>
+    </header>
+
+    <main class="dashboard-content container-fluid">
+
+      <!-- =====================================================================
+           PASO 2 (FASE 2): TRES TARJETAS KPI OFICIALES
+           ===================================================================== -->
+      <section class="dashboard-section" id="seccion-kpis" aria-labelledby="titulo-kpis">
+        <div class="section-heading-row">
+          <h2 class="subheading" id="titulo-kpis">Indicadores Clave de Desempeño (KPIs)</h2>
+          <span class="kpi-sync-badge">🔄 Actualizado en tiempo real</span>
+        </div>
+
+        <div class="kpi-grid">
+          <!-- KPI 1 -->
+          <article class="kpi-card" id="card-kpi-total">
+            <div class="kpi-icon-box kpi-icon-blue">📦</div>
+            <div class="kpi-data">
+              <span class="kpi-title">Productos registrados</span>
+              <strong class="kpi-value" id="kpi-productos-total">--</strong>
+              <p class="kpi-desc">Total de productos activos en el catálogo de EcoMarket.</p>
+            </div>
+          </article>
+
+          <!-- KPI 2 -->
+          <article class="kpi-card" id="card-kpi-bajo">
+            <div class="kpi-icon-box kpi-icon-amber">⚠️</div>
+            <div class="kpi-data">
+              <span class="kpi-title">Inventario bajo</span>
+              <strong class="kpi-value" id="kpi-inventario-bajo">--</strong>
+              <p class="kpi-desc">Productos con existencia igual o inferior al stock mínimo.</p>
+            </div>
+          </article>
+
+          <!-- KPI 3 -->
+          <article class="kpi-card" id="card-kpi-valor">
+            <div class="kpi-icon-box kpi-icon-green">💰</div>
+            <div class="kpi-data">
+              <span class="kpi-title">Valor del inventario</span>
+              <strong class="kpi-value" id="kpi-valor-inventario">--</strong>
+              <p class="kpi-desc">Suma total de (Precio &times; Stock) en Pesos Colombianos (COP).</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           BONUS (FASE 5): GRÁFICO ESTADÍSTICO CON CHART.JS
+           ===================================================================== -->
+      <section class="dashboard-section" id="seccion-grafico" aria-labelledby="titulo-grafico">
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <div>
+              <h2 class="subheading" id="titulo-grafico">Distribución de Productos por Categoría</h2>
+              <p class="chart-subtitle">Visualización dinámica de la oferta disponible en cada línea de comercio sostenible.</p>
+            </div>
+            <span class="badge badge-bonus">Bonus 5% Implementado</span>
+          </div>
+          <div class="chart-canvas-wrapper">
+            <canvas id="grafico-categorias" aria-label="Gráfico de barras que representa el número de productos en cada categoría"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           HERRAMIENTAS DE BÚSQUEDA Y FILTRADO COMBINADO (FASE 5)
+           ===================================================================== -->
+      <section class="dashboard-section" id="seccion-inventario" aria-labelledby="titulo-inventario">
+        <div class="inventory-card">
+          <div class="inventory-card-header">
+            <div>
+              <h2 class="subheading" id="titulo-inventario">Inventario General de Productos</h2>
+              <p class="inventory-subtitle">Búsqueda reactiva, filtros multicriterio y mantenimiento del catálogo.</p>
+            </div>
+
+            <!-- Selector de modo de vista: Tarjetas o Tabla -->
+            <div class="view-switch-group" role="group" aria-label="Cambiar formato de visualización">
+              <button type="button" class="btn-view-switch active" id="btn-vista-cards" title="Ver como tarjetas">
+                ▦ Tarjetas
+              </button>
+              <button type="button" class="btn-view-switch" id="btn-vista-tabla" title="Ver como tabla">
+                ☰ Tabla oficial
+              </button>
+            </div>
+          </div>
+
+          <!-- Barra de Filtros Combinables -->
+          <div class="filters-toolbar">
+            <div class="filter-group search-group">
+              <label for="filtro-busqueda" class="filter-label">Buscar producto o productor</label>
+              <div class="search-input-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" 
+                       id="filtro-busqueda" 
+                       class="form-control" 
+                       placeholder="Ej. Café, Miel, Manos de Tierra...">
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <label for="filtro-categoria" class="filter-label">Categoría</label>
+              <select id="filtro-categoria" class="form-control">
+                <option value="">Todas las categorías</option>
+                <option value="Frutas y verduras">Frutas y verduras</option>
+                <option value="Despensa">Despensa</option>
+                <option value="Cuidado personal">Cuidado personal</option>
+                <option value="Hogar sostenible">Hogar sostenible</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label for="filtro-ciudad" class="filter-label">Ciudad de origen</label>
+              <select id="filtro-ciudad" class="form-control">
+                <option value="">Todas las ciudades</option>
+                <option value="Bucaramanga">Bucaramanga</option>
+                <option value="Floridablanca">Floridablanca</option>
+                <option value="Girón">Girón</option>
+                <option value="Bogotá">Bogotá</option>
+                <option value="Medellín">Medellín</option>
+                <option value="Cali">Cali</option>
+                <option value="Tunja">Tunja</option>
+                <option value="Cúcuta">Cúcuta</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label for="filtro-estado" class="filter-label">Estado de stock</label>
+              <select id="filtro-estado" class="form-control">
+                <option value="">Todos los estados</option>
+                <option value="Disponible">Disponible (Verde)</option>
+                <option value="Stock bajo">Stock bajo (Amarillo)</option>
+                <option value="Agotado">Agotado (Rojo)</option>
+              </select>
+            </div>
+
+            <div class="filter-group-actions">
+              <button type="button" class="btn btn-outline" id="btn-limpiar-filtros" title="Restablecer todos los filtros">
+                Limpiar filtros
+              </button>
+            </div>
+          </div>
+
+          <!-- Barra de Estado de Resultados -->
+          <div class="results-bar">
+            <span id="contador-resultados" class="results-counter">Cargando productos...</span>
+            <div class="results-legend">
+              <span class="legend-item"><span class="badge badge-disponible">Disponible</span> Stock &gt; Mínimo</span>
+              <span class="legend-item"><span class="badge badge-stock-bajo">Stock bajo</span> 0 &lt; Stock &le; Mínimo</span>
+              <span class="legend-item"><span class="badge badge-agotado">Agotado</span> Stock = 0</span>
+            </div>
+          </div>
+
+          <!-- Contenedor 1: Grid de Tarjetas (Fase 5) -->
+          <div class="cards-view-wrapper" id="contenedor-cards-productos">
+            <div class="products-dashboard-grid" id="grid-productos-dinamico">
+              <!-- Renderizado mediante app.js -->
+            </div>
+          </div>
+
+          <!-- Contenedor 2: Tabla Responsive de 7 Columnas (Fase 2 Paso 3) -->
+          <div class="table-view-wrapper hidden" id="contenedor-tabla-productos">
+            <div class="table-responsive">
+              <table class="inventory-table" id="tabla-productos">
+                <thead>
+                  <tr>
+                    <th scope="col">Código</th>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Categoría</th>
+                    <th scope="col">Precio COP</th>
+                    <th scope="col">Stock</th>
+                    <th scope="col">Productor / Ciudad</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col" class="text-center">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="tbody-productos">
+                  <!-- Filas renderizadas mediante app.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Estado Vacío (Empty State) -->
+          <div class="empty-state hidden" id="estado-vacio">
+            <div class="empty-icon">🍃</div>
+            <h3 class="empty-title">No se encontraron productos coincidentes</h3>
+            <p class="empty-desc">Intenta ajustar los términos de búsqueda o restablecer los filtros para volver a ver el catálogo completo.</p>
+            <button type="button" class="btn btn-outline" id="btn-reset-vacio">Restablecer filtros</button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- =====================================================================
+           SECCIÓN DE PRODUCTORES ALIADOS
+           ===================================================================== -->
+      <section class="dashboard-section" id="seccion-productores" aria-labelledby="titulo-aliados">
+        <div class="producers-summary-card">
+          <div class="producers-header">
+            <div>
+              <h2 class="subheading" id="titulo-aliados">Red de Productores Sostenibles</h2>
+              <p class="producers-desc">Pequeños agricultores y talleres artesanales aliados en el modelo EcoMarket.</p>
+            </div>
+          </div>
+          <div class="producers-pills" id="lista-productores-pills">
+            <!-- Rellenado dinámicamente con productores únicos -->
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer Administrativo -->
+    <footer class="dashboard-footer">
+      <div class="container-fluid footer-dashboard-inner">
+        <p>&copy; 2026 EcoMarket. Panel de Administración y Control de Inventarios.</p>
+        <p>Taller Práctico 2 | HTML5, CSS3, JavaScript Vanilla, Chart.js &amp; localStorage.</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- =========================================================================
+       MODAL CRUD: CREAR Y EDITAR PRODUCTO (ACCESIBLE WCAG)
+       ========================================================================= -->
+  <div class="modal-backdrop hidden" id="modal-backdrop" aria-hidden="true"></div>
+
+  <div class="modal-dialog hidden" 
+       id="modal-producto" 
+       role="dialog" 
+       aria-modal="true" 
+       aria-labelledby="modal-titulo">
+    
+    <div class="modal-content">
+      <header class="modal-header">
+        <div class="modal-title-group">
+          <span class="modal-icon">🌱</span>
+          <h2 class="modal-title" id="modal-titulo">Agregar Producto</h2>
+        </div>
+        <button type="button" class="btn-modal-close" id="btn-cerrar-modal" aria-label="Cerrar ventana modal">
+          &times;
+        </button>
+      </header>
+
+      <form id="form-producto" class="modal-form" novalidate>
+        <!-- Campo oculto para almacenar ID en modo edición -->
+        <input type="hidden" id="producto-id" name="id">
+
+        <div class="form-row">
+          <div class="form-group col-12">
+            <label for="producto-nombre" class="form-label">Nombre del producto <span class="required-star">*</span></label>
+            <input type="text" 
+                   id="producto-nombre" 
+                   name="nombre" 
+                   class="form-control" 
+                   placeholder="Ej. Miel de abejas 500 g" 
+                   required 
+                   minlength="3" 
+                   maxlength="80" 
+                   aria-required="true">
+            <small class="form-hint">Entre 3 y 80 caracteres descriptivos.</small>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-6">
+            <label for="producto-categoria" class="form-label">Categoría <span class="required-star">*</span></label>
+            <select id="producto-categoria" name="categoria" class="form-control" required aria-required="true">
+              <option value="">Seleccione una categoría</option>
+              <option value="Frutas y verduras">Frutas y verduras</option>
+              <option value="Despensa">Despensa</option>
+              <option value="Cuidado personal">Cuidado personal</option>
+              <option value="Hogar sostenible">Hogar sostenible</option>
+            </select>
+          </div>
+
+          <div class="form-group col-6">
+            <label for="producto-ciudad" class="form-label">Ciudad de origen <span class="required-star">*</span></label>
+            <select id="producto-ciudad" name="ciudad" class="form-control" required aria-required="true">
+              <option value="">Seleccione una ciudad</option>
+              <option value="Bucaramanga">Bucaramanga</option>
+              <option value="Floridablanca">Floridablanca</option>
+              <option value="Girón">Girón</option>
+              <option value="Bogotá">Bogotá</option>
+              <option value="Medellín">Medellín</option>
+              <option value="Cali">Cali</option>
+              <option value="Tunja">Tunja</option>
+              <option value="Cúcuta">Cúcuta</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-4">
+            <label for="producto-precio" class="form-label">Precio (COP) <span class="required-star">*</span></label>
+            <input type="number" 
+                   id="producto-precio" 
+                   name="precio" 
+                   class="form-control" 
+                   placeholder="28000" 
+                   required 
+                   min="100" 
+                   step="100" 
+                   aria-required="true">
+          </div>
+
+          <div class="form-group col-4">
+            <label for="producto-stock" class="form-label">Stock actual <span class="required-star">*</span></label>
+            <input type="number" 
+                   id="producto-stock" 
+                   name="stock" 
+                   class="form-control" 
+                   placeholder="18" 
+                   required 
+                   min="0" 
+                   step="1" 
+                   aria-required="true">
+          </div>
+
+          <div class="form-group col-4">
+            <label for="producto-stock-minimo" class="form-label">Stock mínimo <span class="required-star">*</span></label>
+            <input type="number" 
+                   id="producto-stock-minimo" 
+                   name="stockMinimo" 
+                   class="form-control" 
+                   placeholder="5" 
+                   required 
+                   min="0" 
+                   step="1" 
+                   aria-required="true">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-7">
+            <label for="producto-productor" class="form-label">Productor o aliado <span class="required-star">*</span></label>
+            <input type="text" 
+                   id="producto-productor" 
+                   name="productor" 
+                   class="form-control" 
+                   placeholder="Ej. Apiario La Montaña" 
+                   required 
+                   minlength="3" 
+                   maxlength="80" 
+                   aria-required="true">
+          </div>
+
+          <div class="form-group col-5">
+            <label for="producto-fecha" class="form-label">Fecha registro <span class="required-star">*</span></label>
+            <input type="date" 
+                   id="producto-fecha" 
+                   name="fechaRegistro" 
+                   class="form-control" 
+                   min="2026-01-01" 
+                   max="2026-11-03" 
+                   required 
+                   aria-required="true">
+          </div>
+        </div>
+
+        <div class="form-row form-checkbox-row">
+          <div class="checkbox-wrapper">
+            <input type="checkbox" id="producto-organico" name="organico">
+            <label for="producto-organico" class="checkbox-label">Certificación agroecológica / 100% Orgánico</label>
+          </div>
+
+          <div class="checkbox-wrapper">
+            <input type="checkbox" id="producto-activo" name="activo" checked>
+            <label for="producto-activo" class="checkbox-label">Producto habilitado en catálogo (Activo)</label>
+          </div>
+        </div>
+
+        <!-- Caja de mensajes de error de validación -->
+        <div class="form-alert hidden" id="modal-error-alert" role="alert">
+          <span class="alert-icon">⚠️</span>
+          <span class="alert-text" id="modal-error-text">Por favor complete todos los campos obligatorios.</span>
+        </div>
+
+        <footer class="modal-footer">
+          <button type="button" class="btn btn-outline" id="btn-cancelar-modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary" id="btn-guardar-producto">Guardar producto</button>
+        </footer>
+      </form>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL DE CONFIRMACIÓN PARA ELIMINAR (ACCESIBLE WCAG)
+       ========================================================================= -->
+  <div class="modal-dialog modal-dialog-sm hidden" 
+       id="modal-confirmar-eliminar" 
+       role="alertdialog" 
+       aria-modal="true" 
+       aria-labelledby="titulo-eliminar" 
+       aria-describedby="desc-eliminar">
+    
+    <div class="modal-content">
+      <header class="modal-header">
+        <h2 class="modal-title text-danger" id="titulo-eliminar">Eliminar Producto</h2>
+        <button type="button" class="btn-modal-close" id="btn-cerrar-confirmar" aria-label="Cerrar modal">&times;</button>
+      </header>
+
+      <div class="modal-body">
+        <p class="confirm-message" id="desc-eliminar">
+          ¿Estás seguro de que deseas eliminar este producto del inventario? Esta acción actualizará los indicadores y no se podrá deshacer.
+        </p>
+        <div class="confirm-product-preview" id="preview-eliminar-nombre">
+          <!-- Nombre y código del producto a eliminar -->
+        </div>
+      </div>
+
+      <footer class="modal-footer">
+        <button type="button" class="btn btn-outline" id="btn-cancelar-eliminar">Cancelar</button>
+        <button type="button" class="btn btn-danger" id="btn-confirmar-eliminar-accion">Eliminar definitivamente</button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Toast de Notificación Flotante -->
+  <div class="toast-notification hidden" id="toast-notificacion" role="status" aria-live="polite">
+    <span class="toast-icon" id="toast-icon">✅</span>
+    <span class="toast-message" id="toast-message">Operación realizada con éxito.</span>
+  </div>
+
+  <!-- Scripts de la Aplicación -->
+  <script src="validacion.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

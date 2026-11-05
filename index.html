@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="EcoMarket - Startup colombiana que conecta pequeños productores locales de alimentos orgánicos y productos sostenibles con consumidores responsables.">
+  <title>EcoMarket | Comercio Sostenible y Productores Locales</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="landing-body">
+
+  <!-- =========================================================================
+       1. ENCABEZADO Y NAVEGACIÓN PRINCIPAL
+       ========================================================================= -->
+  <header class="main-header" id="inicio">
+    <div class="container header-container">
+      <a href="index.html" class="logo" aria-label="Ir al inicio de EcoMarket">
+        <span class="logo-leaf">🌱</span> Eco<span>Market</span>
+      </a>
+
+      <nav class="main-nav" aria-label="Navegación principal de la landing page">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="#categorias" class="nav-link">Categorías</a></li>
+          <li class="nav-item"><a href="#destacados" class="nav-link">Productos</a></li>
+          <li class="nav-item"><a href="#impacto" class="nav-link">Impacto Social</a></li>
+          <li class="nav-item"><a href="#productores" class="nav-link">Productores</a></li>
+          <li class="nav-item"><a href="#boletin" class="nav-link">Comunidad</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="#destacados" class="btn btn-outline">Explorar catálogo</a>
+        <a href="dashboard.html" class="btn btn-primary">Panel Admin</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- =======================================================================
+         2. SECCIÓN HERO
+         ======================================================================= -->
+    <section class="hero-section">
+      <div class="container hero-container">
+        <div class="hero-content">
+          <span class="badge badge-hero">🇨🇴 Cosecha Campesina y Comercio Directo</span>
+          <h1 class="hero-title">Alimentos orgánicos y artículos sostenibles directo a tu hogar</h1>
+          <p class="hero-description">
+            Conectamos a pequeños agricultores y emprendimientos verdes de Santander, Boyacá y toda Colombia con consumidores que eligen alimentarse bien y proteger nuestra tierra.
+          </p>
+          <div class="hero-cta-group">
+            <a href="dashboard.html" class="btn btn-primary btn-large">Gestionar Inventario</a>
+            <a href="#destacados" class="btn btn-secondary btn-large">Ver Productos Destacados</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-number">+150</span>
+              <span class="stat-label">Familias productoras</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">100%</span>
+              <span class="stat-label">Agroecológico y limpio</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">8</span>
+              <span class="stat-label">Ciudades conectadas</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-media">
+          <div class="hero-card-featured">
+            <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&fit=crop&w=700&q=80" 
+                 alt="Canasta con vegetales frescos recién cosechados del campo colombiano" 
+                 class="hero-img"
+                 loading="lazy">
+            <div class="hero-floating-card">
+              <span class="floating-icon">🐝</span>
+              <div>
+                <strong>Comercio Justo Garantizado</strong>
+                <p>El 80% del precio de venta llega íntegro a las familias rurales</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         3. SECCIÓN DE CATEGORÍAS
+         ======================================================================= -->
+    <section class="section categories-section" id="categorias">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Líneas Sostenibles</span>
+          <h2 class="section-title">Explora por categorías responsables</h2>
+          <p class="section-subtitle">Descubre una selección consciente cultivada y elaborada respetando los ciclos de la naturaleza.</p>
+        </div>
+
+        <div class="categories-grid">
+          <article class="category-card">
+            <div class="category-icon-wrapper">🥑</div>
+            <h3 class="category-title">Frutas y verduras</h3>
+            <p class="category-desc">Cosechas frescas del día de huertas agroecológicas libres de agroquímicos y pesticidas tóxicos.</p>
+            <a href="dashboard.html" class="category-link" aria-label="Ver inventario de Frutas y verduras">Ver en inventario &rarr;</a>
+          </article>
+
+          <article class="category-card">
+            <div class="category-icon-wrapper">🍯</div>
+            <h3 class="category-title">Despensa</h3>
+            <p class="category-desc">Miel pura de abejas, cafés especiales de sombra, granos ancestrales y panela orgánica sin refinar.</p>
+            <a href="dashboard.html" class="category-link" aria-label="Ver inventario de Despensa">Ver en inventario &rarr;</a>
+          </article>
+
+          <article class="category-card">
+            <div class="category-icon-wrapper">🧼</div>
+            <h3 class="category-title">Cuidado personal</h3>
+            <p class="category-desc">Cosmética botánica, jabones saponificados en frío y productos libres de crueldad y parabenos.</p>
+            <a href="dashboard.html" class="category-link" aria-label="Ver inventario de Cuidado personal">Ver en inventario &rarr;</a>
+          </article>
+
+          <article class="category-card">
+            <div class="category-icon-wrapper">🧺</div>
+            <h3 class="category-title">Hogar sostenible</h3>
+            <p class="category-desc">Artículos reutilizables, cepillos de bambú, fibras naturales y soluciones libres de plástico de un solo uso.</p>
+            <a href="dashboard.html" class="category-link" aria-label="Ver inventario de Hogar sostenible">Ver en inventario &rarr;</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         4. SECCIÓN DE PRODUCTOS DESTACADOS
+         ======================================================================= -->
+    <section class="section products-section" id="destacados">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Destacados de la Semana</span>
+          <h2 class="section-title">Favoritos de nuestra comunidad</h2>
+          <p class="section-subtitle">Alimentos y productos artesanales más valorados por su calidad, frescura e impacto positivo.</p>
+        </div>
+
+        <div class="products-grid">
+          <!-- Producto 1 -->
+          <article class="product-card">
+            <div class="product-image-container">
+              <span class="product-badge">100% Orgánico</span>
+              <img src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=500&q=80" 
+                   alt="Frasco de Miel de abejas pura 500 gramos" 
+                   class="product-image"
+                   loading="lazy">
+            </div>
+            <div class="product-info">
+              <span class="product-category">Despensa • Bucaramanga</span>
+              <h3 class="product-title">Miel de abejas 500 g</h3>
+              <p class="product-producer">Apiario La Montaña</p>
+              <div class="product-footer">
+                <span class="product-price">$28.000 COP</span>
+                <span class="badge badge-disponible">Disponible</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Producto 2 -->
+          <article class="product-card">
+            <div class="product-image-container">
+              <span class="product-badge">Café de Origen</span>
+              <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=500&q=80" 
+                   alt="Bolsa de Café especial de origen 340 gramos" 
+                   class="product-image"
+                   loading="lazy">
+            </div>
+            <div class="product-info">
+              <span class="product-category">Despensa • Floridablanca</span>
+              <h3 class="product-title">Café orgánico especial 340 g</h3>
+              <p class="product-producer">Café El Roble</p>
+              <div class="product-footer">
+                <span class="product-price">$32.000 COP</span>
+                <span class="badge badge-stock-bajo">Stock bajo</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Producto 3 -->
+          <article class="product-card">
+            <div class="product-image-container">
+              <span class="product-badge">Artesanal</span>
+              <img src="https://images.unsplash.com/photo-1607006411601-775c8cc632dc?auto=format&fit=crop&w=500&q=80" 
+                   alt="Jabón artesanal botánico de caléndula" 
+                   class="product-image"
+                   loading="lazy">
+            </div>
+            <div class="product-info">
+              <span class="product-category">Cuidado personal • Girón</span>
+              <h3 class="product-title">Jabón artesanal de caléndula</h3>
+              <p class="product-producer">Manos de Tierra</p>
+              <div class="product-footer">
+                <span class="product-price">$14.000 COP</span>
+                <span class="badge badge-disponible">Disponible</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Producto 4 -->
+          <article class="product-card">
+            <div class="product-image-container">
+              <span class="product-badge">Cero Plástico</span>
+              <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=500&q=80" 
+                   alt="Bolsa reutilizable de algodón natural" 
+                   class="product-image"
+                   loading="lazy">
+            </div>
+            <div class="product-info">
+              <span class="product-category">Hogar sostenible • Bogotá</span>
+              <h3 class="product-title">Bolsa reutilizable de algodón</h3>
+              <p class="product-producer">EcoTextil Santander</p>
+              <div class="product-footer">
+                <span class="product-price">$12.000 COP</span>
+                <span class="badge badge-disponible">Disponible</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         5. SECCIÓN DE IMPACTO: COMPRA LOCAL, GENERA IMPACTO
+         ======================================================================= -->
+    <section class="section impact-section" id="impacto">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag section-tag-light">Comercio con Conciencia</span>
+          <h2 class="section-title text-light">Compra local, genera impacto positivo</h2>
+          <p class="section-subtitle text-light-muted">Un modelo de proximidad que devuelve el valor a quienes trabajan la tierra.</p>
+        </div>
+
+        <div class="impact-grid">
+          <div class="impact-card">
+            <div class="impact-icon">💚</div>
+            <h3 class="impact-card-title">Para ti y tu familia</h3>
+            <ul class="impact-list">
+              <li>Alimentos cosechados en su momento justo, conservando todos sus nutrientes y sabor natural.</li>
+              <li>Conocimiento directo del origen, productor y método de cultivo de cada producto.</li>
+              <li>Consumo libre de conservantes, ceras sintéticas y residuos de pesticidas industriales.</li>
+            </ul>
+          </div>
+
+          <div class="impact-card">
+            <div class="impact-icon">👩‍🌾</div>
+            <h3 class="impact-card-title">Para el productor campesino</h3>
+            <ul class="impact-list">
+              <li>Ingresos justos y pagos puntuales sin intermediación especulativa.</li>
+              <li>Fortalecimiento del tejido comunitario en regiones rurales de Colombia.</li>
+              <li>Acceso a un canal formal y digital de venta directa a precio digno.</li>
+            </ul>
+          </div>
+
+          <div class="impact-card">
+            <div class="impact-icon">🌎</div>
+            <h3 class="impact-card-title">Para el medio ambiente</h3>
+            <ul class="impact-list">
+              <li>Drástica reducción de la huella de carbono asociada al transporte masivo de alimentos.</li>
+              <li>Fomento de prácticas de rotación de cultivos y regeneración del suelo fértil.</li>
+              <li>Empaques biodegradables, reutilizables o con materiales 100% reciclados.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         6. SECCIÓN DE HISTORIAS DE PRODUCTORES
+         ======================================================================= -->
+    <section class="section testimonials-section" id="productores">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Rostros del Campo</span>
+          <h2 class="section-title">Voces de nuestros productores aliados</h2>
+          <p class="section-subtitle">Conoce a las personas dedicadas que hacen posible una alimentación consciente en Colombia.</p>
+        </div>
+
+        <div class="testimonials-grid">
+          <blockquote class="testimonial-card">
+            <p class="testimonial-quote">
+              "En la Mesa de Los Santos nuestras colmenas están protegidas del uso de agroquímicos. Gracias a EcoMarket entregamos miel pura directamente a clientes que valoran el trabajo de preservación de las abejas."
+            </p>
+            <footer class="testimonial-author">
+              <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=120&q=80" 
+                   alt="Retrato de Lucía Mendoza, apicultora" 
+                   class="author-avatar"
+                   loading="lazy">
+              <div>
+                <cite class="author-name">Lucía Mendoza</cite>
+                <span class="author-role">Fundadora de Apiario La Montaña • Santander</span>
+              </div>
+            </footer>
+          </blockquote>
+
+          <blockquote class="testimonial-card">
+            <p class="testimonial-quote">
+              "El cultivo de café orgánico bajo sombra preserva las aves y el agua de la quebrada. Poder vender sin intermediarios nos permite reinvertir en la salud de nuestra finca y en educación para nuestros hijos."
+            </p>
+            <footer class="testimonial-author">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80" 
+                   alt="Retrato de Don Gonzalo Ramírez, caficultor orgánico" 
+                   class="author-avatar"
+                   loading="lazy">
+              <div>
+                <cite class="author-name">Gonzalo Ramírez</cite>
+                <span class="author-role">Caficultor en Café El Roble • Floridablanca</span>
+              </div>
+            </footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         7. SECCIÓN DE BOLETÍN Y SUSCRIPCIÓN
+         ======================================================================= -->
+    <section class="section newsletter-section" id="boletin">
+      <div class="container newsletter-container">
+        <div class="newsletter-content">
+          <span class="section-tag">Comunidad Consciente</span>
+          <h2 class="section-title">Únete a nuestra red de consumo responsable</h2>
+          <p class="newsletter-desc">
+            Recibe semanalmente recetas de temporada, avisos de cosechas frescas de nuestros campesinos y guías prácticas para reducir tu huella ambiental.
+          </p>
+
+          <form class="newsletter-form" id="form-suscripcion" action="#" method="post" novalidate>
+            <div class="form-group">
+              <label for="nombre-suscriptor" class="form-label">Nombre completo</label>
+              <input type="text" 
+                     id="nombre-suscriptor" 
+                     name="nombre" 
+                     class="form-input" 
+                     placeholder="Ej. Valentina Gómez" 
+                     required
+                     minlength="3"
+                     aria-required="true">
+            </div>
+
+            <div class="form-group">
+              <label for="correo-suscriptor" class="form-label">Correo electrónico</label>
+              <input type="email" 
+                     id="correo-suscriptor" 
+                     name="email" 
+                     class="form-input" 
+                     placeholder="valentina@ejemplo.com" 
+                     required
+                     aria-required="true">
+            </div>
+
+            <div class="form-group form-terms">
+              <input type="checkbox" id="acepta-terminos" name="terminos" required aria-required="true">
+              <label for="acepta-terminos" class="terms-label">
+                Acepto la política de tratamiento de datos personales para recibir comunicaciones sobre comercio sostenible.
+              </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Suscribirme al boletín</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================================
+       8. PIE DE PÁGINA (FOOTER)
+       ========================================================================= -->
+  <footer class="main-footer">
+    <div class="container footer-container">
+      <div class="footer-col brand-col">
+        <a href="index.html" class="logo logo-footer">
+          <span class="logo-leaf">🌱</span> Eco<span>Market</span>
+        </a>
+        <p class="footer-tagline">
+          Plataforma de comercio justo que une familias campesinas y consumidores conscientes en Colombia.
+        </p>
+        <span class="country-badge">🇨🇴 Bucaramanga, Santander • Colombia</span>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-title">Navegación</h4>
+        <ul class="footer-links">
+          <li><a href="#categorias">Categorías</a></li>
+          <li><a href="#destacados">Productos Destacados</a></li>
+          <li><a href="#impacto">Impacto Social</a></li>
+          <li><a href="#productores">Nuestros Productores</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-title">Plataforma</h4>
+        <ul class="footer-links">
+          <li><a href="dashboard.html">Panel de Control (Dashboard)</a></li>
+          <li><a href="#boletin">Boletín Sostenible</a></li>
+          <li><a href="#">Términos del Servicio</a></li>
+          <li><a href="#">Tratamiento de Datos</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-title">Contacto</h4>
+        <address class="footer-contact">
+          <p>📍 Calle 48 # 28-32, Bucaramanga</p>
+          <p>✉️ contacto@ecomarket.co</p>
+          <p>📞 (+57) 310 456 7890</p>
+        </address>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>&copy; 2026 EcoMarket Colombia. Taller Práctico 2 | Campuslands.</p>
+      <p>Desarrollo frontend con HTML5 semántico, CSS3 puro y JavaScript vanilla.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
